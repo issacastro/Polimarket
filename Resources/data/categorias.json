@@ -1,0 +1,49 @@
+{
+    "Categorias":[
+            {
+                "Categoria":"Vehiculos",
+                        "Num":"1","SRV":"1"          },
+            {
+                "Categoria":"Celulares",
+                        "Num":"2","SRV":"2"          },
+            {
+                "Categoria":"Hogar",
+                        "Num":"3","SRV":"1"          },
+            {
+                "Categoria":"Despensa",
+                        "Num":"4","SRV":"1"          },
+            {
+                "Categoria":"Deportes",
+                        "Num":"5","SRV":"1"          },        
+            {
+                "Categoria":"Salud",
+                        "Num":"6","SRV":"1"          },
+           {
+                "Categoria":"Herramientas",
+                        "Num":"7","SRV":"1"          },    
+            {
+                "Categoria":"Libros",
+                        "Num":"8","SRV":"1"          },
+            {
+                "Categoria":"Moda",
+                        "Num":"9","SRV":"2"          },
+            {
+                "Categoria":"Electronica",
+                        "Num":"10","SRV":"1"          },
+            {
+                "Categoria":"Tareas",
+                        "Num":"11","SRV":"2"          },
+            {
+                "Categoria":"Proyectos",
+                        "Num":"12","SRV":"2"          },
+            {
+                "Categoria":"Practicas",
+                        "Num":"13","SRV":"2"          },
+             {
+                "Categoria":"Dulceria",
+                        "Num":"14","SRV":"2"          },
+           {
+                "Categoria":"Mascotas",
+                        "Num":"15","SRV":"2"          }
+            ]
+        }

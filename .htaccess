@@ -1,0 +1,18 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php
+RewriteRule ^index$ index.php
+RewriteRule ^waaa$ View/blank.php
+RewriteRule ^login$ View/login.php
+RewriteRule ^perfil$ View/perfil.php
+RewriteRule ^signup$ View/register.php
+RewriteRule ^store$ View/store.php
+RewriteRule ^pedido$ View/Pedido.php
+RewriteRule ^pagar$ View/pago.php
+RewriteRule ^pagar$ View/blank.php
+RewriteRule ^procesar$ Model/m_compra.php
+RewriteRule ^product$ View/product.php
+RewriteRule ^publicar$ View/public.php
+</IfModule>

@@ -1,0 +1,88 @@
+{
+    "Escuelas":[
+            {
+                "Escuela":"CICS UMA",
+                        "Num":"1","SRV":"1"          },
+            {
+                "Escuela":"CCICS UST",
+                        "Num":"2","SRV":"1"          },
+            {
+                "Escuela":"ENBA",
+                        "Num":"3","SRV":"1"          },
+            {
+                "Escuela":"ENCB",
+                        "Num":"4","SRV":"1"          },
+            {
+                "Escuela":"ENMH",
+                        "Num":"5","SRV":"1"          },        
+            {
+                "Escuela":"ESM",
+                        "Num":"6","SRV":"1"          },
+           {
+                "Escuela":"ESEO",
+                        "Num":"7","SRV":"1"          },    
+            {
+                "Escuela":"ESCA UT",
+                        "Num":"8","SRV":"1"          },
+            {
+                "Escuela":"ESCA UST",
+                        "Num":"9","SRV":"1"          },
+            {
+                "Escuela":"ESE",
+                        "Num":"10","SRV":"1"          },
+            {
+                "Escuela":"EST",
+                        "Num":"11","SRV":"1"          },
+            {
+                "Escuela":"ESIME UA",
+                        "Num":"12","SRV":"1"          },
+            {
+                "Escuela":"ESIME UC",
+                        "Num":"13","SRV":"1"          },
+             {
+                "Escuela":"ESIME UT",
+                        "Num":"14","SRV":"1"          },
+            {
+                "Escuela":"ESIME UZ",
+                        "Num":"15","SRV":"1"          },
+            {
+                "Escuela":"ESIA UTECA",
+                        "Num":"16","SRV":"1"          },
+            {
+                "Escuela":"ESIA UT",
+                        "Num":"17","SRV":"1"          },
+            {
+                "Escuela":"ESIA UZ",
+                        "Num":"18","SRV":"1"          },
+            {
+                "Escuela":"ESIQIE",
+                        "Num":"19","SRV":"1"          },        
+            {
+                "Escuela":"ESIT",
+                        "Num":"20","SRV":"1"          },
+           {
+                "Escuela":"ESFM",
+                        "Num":"21","SRV":"1"          },    
+            {
+                "Escuela":"ESCOM",
+                        "Num":"22","SRV":"1"          },
+            {
+                "Escuela":"UPIITA",
+                        "Num":"23","SRV":"1"          },
+            {
+                "Escuela":"UPIICSA",
+                        "Num":"24","SRV":"1"          },
+            {
+                "Escuela":"UPIBI",
+                        "Num":"25","SRV":"1"          },
+            {
+                "Escuela":"UPIIG",
+                        "Num":"26","SRV":"1"          },
+            {
+                "Escuela":"UPIIZ",
+                        "Num":"27","SRV":"1"          },
+             {
+                "Escuela":"UPIIH",
+                        "Num":"28","SRV":"1"          }
+            ]
+        }
