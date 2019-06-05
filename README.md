@@ -1,14 +1,13 @@
-# PoliMarket 
+# PoliMarket :sunglasses:
 ---
 ## Descripción del sistema
 
 Cualquier usuario previamente registrado en el sistema podrá acceder, visualizar y comprar los artículos que se encuentren disponibles en el catálogo de ventas  o simplemente navegar y ver las características de los diferentes artículos.
-El usuario deberá seleccionar a la escuela a la que pertenece.
 De igual manera podrá agregar sus propios artículos en venta.
 
 ## Fragmentación de datos
 
-La fragmentación de los datos se distribuirá a partir del criterio de la escuela seleccionada, los datos de cada escuela estarán alojadas en un servidor distinto, las compras de los productos se alojarán en base a la ubicación del producto bajo el mismo criterio, se consideraron las siguientes escuelas:
+La fragmentación de los datos se distribuirá a partir del criterio de la categoria seleccionada, los datos de cada categoria estarán alojadas en un servidor distinto, las compras de los productos se alojarán en base a la ubicación del producto bajo el mismo criterio, se consideraron las siguientes escuelas:
 
 **Escuelas :**
 ---------------
@@ -61,7 +60,7 @@ Para poder comprar o publicar productos será necesario que el usuario inicie  s
 Todo usuario registrado podrá publicar sus productos acompañado de máximo 5 fotografías del producto, precio, categoría y una breve descripción.
 
 ### Catálogo de Productos:
-Se tendrá una vista general de todos los productos publicados con un buscador por descripción y/o filtro de categoría.
+Se tendrá una vista general de todos los productos publicados con un buscador por descripción y/o filtro de categoría y precio.
 Habrá un sección donde se tendrán los productos organizados por categoría, el cliente podrá seleccionar la categoría  
 
 ### Carrito de Compras
@@ -75,7 +74,7 @@ Al realizar la compra se enviará por correo electrónico al usuario comprador l
 # Consultas Distribuidas
 *Búsqueda:*
 ---------------
-* El sistema tendrá una busqueda de productos en base a su Nombre, y hara la busqueda para cualquier escuela.
+* El sistema tendrá una busqueda de productos en base a su Nombre, y hara la busqueda para cualquier categoria.
 * El sistema tendrá un filtro para ubicar los productos que estén en la escuela seleccionada por el usuario.
 * El sistema tendrá un filtro por categoría
 ---
