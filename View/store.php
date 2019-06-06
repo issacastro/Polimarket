@@ -81,25 +81,10 @@
 							<div class="checkbox-filter">					
 						</div>
 							<div class="product-widget">
-								<div class="product-img">
-									<img src="View/img/product02.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Categoria</p>
-									<h3 class="product-name"><a href="#">Nombre del producto</a></h3>
-									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								</div>
 							</div>
 
 							<div class="product-widget">
-								<div class="product-img">
-									<img src="View/img/product03.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Categoria</p>
-									<h3 class="product-name"><a href="#">Nombre del producto</a></h3>
-									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								</div>
+			
 							</div>
 						</div>
 						<!-- /aside Widget -->
