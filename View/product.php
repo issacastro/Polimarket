@@ -4,7 +4,9 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<?php require'../View/Gen/header_login.php' ?>
+<?php require'../View/Gen/header_login.php';
+include "../Model/m_product.php";
+?>
         	<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">
 			<!-- container -->
@@ -194,123 +196,72 @@
 						</div>
 					</div>
 
+
 					<!-- product -->
+					<?php
+					
+					$pr= getProductTOP2(1,$product->fk_Categoria);
+					foreach ($pr as $p) {
+					
+					?>
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
-								<img src="View/img/product01.png" alt="">
+								<img src="<?php echo $p->img;?>" alt="">
 								<div class="product-label">
 									<span class="sale">-30%</span>
 								</div>
 							</div>
 							<div class="product-body">
-								<p class="product-category">Categoria</p>
-								<h3 class="product-name"><a href="#">Nombre del producto</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+							<input id="<?php echo $p->id_Producto;?>"type="hidden" value="<?php echo $p->fk_Categoria; ?>">
+                    <div  id="<?php echo $p->id_Producto;?>C" style="visibility: hidden"><?php echo $p->fk_Categoria; ?></div>
+								<p class="product-category"><?php echo $p->fk_Categoria;?></p>
+								<h3 class="product-name"><a href="#"><?php echo $p->nombre;?></a></h3>
+								<h4 class="product-price">$<?php echo $p->precio;?> <del class="product-old-price">$<?php echo $p->precio+102;?></del></h4>
 								<div class="product-rating">
 								</div>
 								<div class="product-btns">
-
-									<button class="add-to-compare"><i class="fas fa-exchange-alt"></i><span class="tooltipp">Comparar</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Ver</span></button>
+								<button value="<?php echo $p->id_Producto; ?>"class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Ver</span></button>
 								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Añadir al carrito</button>
 							</div>
 						</div>
 					</div>
 					<!-- /product -->
-
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="View/img/product02.png" alt="">
-								<div class="product-label">
-									<span class="new">NEW</span>
-								</div>
-							</div>
-							<div class="product-body">
-								<p class="product-category">Categoria</p>
-								<h3 class="product-name"><a href="#">Nombre del producto</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>
-								<div class="product-btns">
-
-									<button class="add-to-compare"><i class="fas fa-exchange-alt"></i><span class="tooltipp">Comparar</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Ver</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Añadir al carrito</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
+						<?php }?>
 
 					<div class="clearfix visible-sm visible-xs"></div>
 
 					<!-- product -->
+					<?php
+					
+					$pr= getProductTOP2(2,$product->fk_Categoria);
+					foreach ($pr as $p) {
+					
+					?>
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
-								<img src="View/img/product03.png" alt="">
+								<img src="<?php echo $p->img;?>" alt="">
+								<div class="product-label">
+									<span class="sale">-30%</span>
+								</div>
 							</div>
 							<div class="product-body">
-								<p class="product-category">Categoria</p>
-								<h3 class="product-name"><a href="#">Nombre del producto</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+							<input id="<?php echo $p->id_Producto;?>"type="hidden" value="<?php echo $p->fk_Categoria; ?>">
+                    <div  id="<?php echo $p->id_Producto;?>C" style="visibility: hidden"><?php echo $p->fk_Categoria; ?></div>
+								<p class="product-category"><?php echo $p->fk_Categoria;?></p>
+								<h3 class="product-name"><a href="#"><?php echo $p->nombre;?></a></h3>
+								<h4 class="product-price">$<?php echo $p->precio;?> <del class="product-old-price">$<?php echo $p->precio+102;?></del></h4>
 								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-o"></i>
 								</div>
 								<div class="product-btns">
-
-									<button class="add-to-compare"><i class="fas fa-exchange-alt"></i><span class="tooltipp">Comparar</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Ver</span></button>
+								<button value="<?php echo $p->id_Producto; ?>"class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Ver</span></button>
 								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Añadir al carrito</button>
 							</div>
 						</div>
 					</div>
 					<!-- /product -->
-
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="View/img/product04.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Categoria</p>
-								<h3 class="product-name"><a href="#">Nombre del producto</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-								</div>
-								<div class="product-btns">
-
-									<button class="add-to-compare"><i class="fas fa-exchange-alt"></i><span class="tooltipp">Comparar</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Ver</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Añadir al carrito</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
+						<?php }?>
 
 				</div>
 				<!-- /row -->

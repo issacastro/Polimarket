@@ -38,7 +38,7 @@ $('#PAAGAR').click(function() {
           var  producto = JSON.parse(JSON.stringify(data[i]));
           template = Carrito(producto,template);
           items+=1;
-          total+=producto.precio;
+          total+=producto.precio*producto.cnt;
         }
         document.getElementById("nump").innerHTML = items;
         document.getElementById("items").innerHTML = items+' Item(s) seleccionados';

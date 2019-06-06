@@ -94,6 +94,28 @@ $_SESSION['IMG'] = $img;
        $products=OpenConexion(conexion($SRV),$stmt,$params,$products,1);
        return $products;
     }
+    function getProductTOP2($SRV,$Categoria){
+        //require 'Connection.php';
+        $stmt = "SELECT TOP 2
+        ID_PRODUCTO, T1.FK_USER AS FK_VENDEDOR, T2.NOMBRE AS FK_ESCUELA,FK_CATEGORIA,T.NOMBRE,DESCRIPCION,IMG,STOCK,STATUS,PRECIO 
+        FROM Producto AS T
+        INNER JOIN
+        Vendedor AS T1
+        ON T.FK_VENDEDOR = T1.ID_VENDEDOR
+        INNER JOIN Escuela AS T2 
+        ON T.FK_ESCUELA = T2.ID_ESCUELA
+        WHERE T.FK_CATEGORIA= ? 
+        ";  
+        if($SRV==1){
+            $stmt= $stmt." ORDER BY T.PRECIO DESC ";
+        }else{
+            $stmt= $stmt." ORDER BY T.PRECIO  "; 
+        }
+       $products=array();
+       $params=array($Categoria);
+       $products=OpenConexion(conexion(SRV($Categoria)),$stmt,$params,$products,1);
+       return $products;
+    }
     function getProduct($id,$Categoria){
         $SRV= SRV($Categoria);
         //require 'Connection.php';

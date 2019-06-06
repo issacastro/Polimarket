@@ -233,7 +233,7 @@ $.ajax({
         var  producto = JSON.parse(JSON.stringify(data[i]));
         template = Pedido(producto,template);
         items+=1;
-        total+=producto.precio;
+        total+=producto.precio*producto.cnt;
       }
       $('#PEDIDO').html(template);
       template =`<h5>TOTAL:${total}</h5>`;
@@ -268,7 +268,9 @@ $.ajax({
         <i class="fa fa-star"></i>
         <i class="fa fa-star"></i>
       </div>
-    
+      <div class="product-btns">
+      <button value="${producto.id_Producto}"class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Ver</span></button>
+</div>
     </div>
     
   </div>
