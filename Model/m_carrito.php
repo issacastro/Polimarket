@@ -7,9 +7,13 @@ include '../Controller/Session/session.php';
 //require 'Connection.php';
     $item=getProduct($_POST['ID'],$_POST['CAT']);
     if($item->stock!=0){
-    insert($item);
+    $carrito=insert($item);
     }
+    if($carrito==1){
     echo json_encode(getProduct($_POST['ID'],$_POST['CAT']));
+    }else{
+    echo 1;
+    }
     //sqlsrv_close($conn); 
 
 ?>

@@ -112,20 +112,21 @@
 							<h2 class="product-name"><?php echo $product->nombre?></h2>
 							<div>
 								<h3 class="product-price"><?php echo $product->precio?> MXN</h3>
-								<span class="product-available"><?php echo $product->stock?> en Stock</span>
+								<span id="CNT" class="product-available"><?php echo $product->stock?> en Stock</span>
+								<div  id="CNT" style="visibility: hidden"><?php echo $product->stock?></div>
 							</div>
 							<p><?php echo $product->descripcion?></p>
 							<div class="add-to-cart">
 								<div class="qty-label">
 									Cantidad
 									<div class="input-number">
-										<input type="number">
+										<input type="number" value="1" disabled>
 										<span class="qty-up">+</span>
 										<span class="qty-down">-</span>
 									</div>
 								</div>
 								<button value="<?php echo $product->id_Producto ?>" class="add-to-cart-btn" ><i class="fa fa-shopping-cart"></i> Añadir al carrito</button>
-								<input id="<?php echo $product->id_Producto; ?>"type="hidden" value="<?php echo $product->fk_Categoria ?>">
+								<div  id="<?php echo $product->id_Producto; ?>C" style="visibility: hidden"><?php echo $product->fk_Categoria ?></div>
 							</div>
 
 							<ul class="product-btns">

@@ -56,7 +56,7 @@ $('.eliminarc').click(function(){
     </div>
     <div class="product-body">
         <h3 class="product-name"><a href="#">${producto.nombre}</a></h3>
-        <h4 class="product-price"><span class="qty">${producto.stock}x</span>$${producto.precio}</h4>
+        <h4 class="product-price"><span class="qty">${producto.cnt}x</span>$${producto.precio}</h4>
     </div>
     <button value="${producto.id_Producto}" class="delete eliminarc">x</button>
   </div>

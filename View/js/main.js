@@ -104,6 +104,7 @@
 
 	// Input number
 	$('.input-number').each(function() {
+		//var STOCK = document.getElementById("CNT").innerHTML,
 		var $this = $(this),
 		$input = $this.find('input[type="number"]'),
 		up = $this.find('.qty-up'),
@@ -116,13 +117,15 @@
 			$input.change();
 			updatePriceSlider($this , value)
 		})
-
 		up.on('click', function () {
+		//	if($input.val()<parseInt(STOCK)){
 			var value = parseInt($input.val()) + 1;
 			$input.val(value);
 			$input.change();
 			updatePriceSlider($this , value)
-		})
+		//}
+	}
+		)
 	});
 
 	var priceInputMax = document.getElementById('price-max'),

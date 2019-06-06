@@ -43,6 +43,7 @@ $(document).ready(function(){
                   <div class="product-body">
                     <p class="product-category">${producto.fk_Categoria}</p>
                     <input id="${producto.id_Producto}"type="hidden" value="${producto.fk_Categoria}">
+                    <div  id="${producto.id_Producto}C" style="visibility: hidden">${producto.fk_Categoria}</div>
                     <h3 class="product-name"><a href="#">${producto.nombre}</a></h3>
                     <h4 class="product-price">${producto.precio}<del class="product-old-price">${producto.precio+100}</del></h4>
                     <div class="product-rating">

@@ -33,9 +33,9 @@
 
             //$cnt=+$item->stock;
             //$_SESSION['cnt']=$cnt;
-            
+            return 1;
         } else {
-            echo 'Este producto ya esta en el carrito';
+           return 0;
         }
     }
 

@@ -60,13 +60,12 @@ $(document).ready(function(){
     e.preventDefault();
     $('#register-form')[0].reset();
   })
-$('.quick-view').click(function(){
+  $(document).on('click','.quick-view',function(){
   var SESSION=$("#SESSION").prop('value');
   //alert(SESSION);
   if(SESSION=="SI"){
   var ID = $(this).prop('value');
-  var CAT = $("#"+ID).prop('value');
- // alert(CAT);
+  var CAT = document.getElementById(ID+"C").innerHTML
   //alert(ID);
   $.ajax({
     url:'Model/m_mostrar.php',
@@ -87,11 +86,11 @@ $('.quick-view').click(function(){
   }
 });
 
-$('.add-to-cart-btn').click(function(){
+$(document).on('click','.add-to-cart-btn',function(){
   var SESSION=$("#SESSION").prop('value');
   if(SESSION=="SI"){
   var ID = $(this).prop('value');
-  var CAT = $("#"+ID).prop('value');
+  var CAT = document.getElementById(ID+"C").innerHTML
   //alert(CAT);
 $.ajax({
   url:'Model/m_carrito.php',
@@ -99,6 +98,7 @@ $.ajax({
   data:{ID:ID,CAT:CAT},
   success: function(e){   
     //alert(e);
+    if(e!=1){
     let template =``;
     var  producto = JSON.parse(e);
     //alert(producto.nombre);
@@ -108,12 +108,19 @@ $.ajax({
     $('#Mensaje').html("Listo ya lo agregamos al carrito !");
     $('#PRODUCTO').html(template);
    obtenerC(); 
-    }else{
+    }
+    else{
       let template =`Lo sentimos el vendedor ya no tiene stock`;
       $("#myModal").modal();
       $('#Mensaje').html("Algo salio mal :c");
       $('#PRODUCTO').html(template);
     }
+  }else{
+    let template =`Cuand realices tu compra podras elejir la cantidad de este producto`;
+    $("#myModal").modal();
+    $('#Mensaje').html("! Ya esta en el Carrito!");
+    $('#PRODUCTO').html(template);
+  }
   }
 });
   }else{
