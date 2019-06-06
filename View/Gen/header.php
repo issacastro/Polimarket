@@ -1,4 +1,7 @@
 <head>
+<?php
+$whatINeed = explode('/', $_SERVER['REQUEST_URI']);
+?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -108,15 +111,17 @@
 			<div class="container">
 				<!-- responsive-nav -->
 				<div id="responsive-nav">
-					<!-- NAV -->
-					<ul class="main-nav nav navbar-nav">
+                <ul class="main-nav nav navbar-nav">
+                    <?php if($whatINeed[2]==''){ ?>
 						<li class="active"><a href="/PoliMarket">Home</a></li>
-						<li><a href="store">Store</a></li>
-						
-						<!--<li><a href="#">Laptops</a></li>
-						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Camaras</a></li>
-						<li><a href="#">Accessorios</a></li> /NAV -->
+						<li class="" ><a href="store">Store</a></li>
+                    <?php }elseif($whatINeed[2]=='store'){?>
+						<li class=""><a href="/PoliMarket">Home</a></li>
+						<li class="active" ><a href="store">Store</a></li>
+                    <?php }else{?>
+						<li class=""><a href="/PoliMarket">Home</a></li>
+						<li class="" ><a href="store">Store</a></li>
+                    <?php }?>
 					</ul>
 					<!-- /NAV -->
 				</div>
