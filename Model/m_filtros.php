@@ -105,16 +105,25 @@ function action3(){
     return $products;
 }
 //Productos por escuela
+
+
 function action4(){
-    $stmt="SELECT * FROM Producto
-WHERE PRECIO >= ? AND PRECIO <= ?";
-    $params=array($_POST['min'],$_POST['max']);
-    return getProductsF($stmt,$params);
-}
-
-
-
-
-
-
+    $stmt = "SELECT 
+    ID_PRODUCTO, T1.FK_USER AS FK_VENDEDOR, T2.NOMBRE AS FK_ESCUELA,FK_CATEGORIA,T.NOMBRE,DESCRIPCION,IMG,STOCK,STATUS,PRECIO 
+    FROM Producto AS T
+    INNER JOIN
+    Vendedor AS T1
+    ON T.FK_VENDEDOR = T1.ID_VENDEDOR
+    INNER JOIN Escuela AS T2 
+    ON T.FK_ESCUELA = T2.ID_ESCUELA
+    WHERE T.NOMBRE LIKE ? ";
+       if($_POST['CAT'] =='Categorias'){
+        $query=$stmt;
+        $params=array($_POST['busqueda']."%");
+        }else{
+        $params=array($_POST['busqueda']."%",$_POST['CAT']);
+        $query=$stmt."  AND  FK_CATEGORIA = ?";
+        }
+        return getProductsF($query,$params);
+    }
 ?>

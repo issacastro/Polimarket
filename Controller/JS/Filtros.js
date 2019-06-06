@@ -4,22 +4,37 @@ $('.PrecioF').click(function(){
  Precio();  
 })
 
-$('#Buscar-nombre').submit(function(e){
+$(document).on('keyup','#Buscar-nombre',function(e){
   var busqueda = $('#bus').val();
   var CAT = $('.categorias').prop('value');
-  alert(busqueda);
-  alert(CAT);
+  //alert(busqueda);
+  //alert(CAT);
+
+  search(CAT,busqueda);
   
+  e.preventDefault();
+});
+$(document).on('submit','#Buscar-nombre',function(e){
+  var busqueda = $('#bus').val();
+  var CAT = $('.categorias').prop('value');
+  search(CAT,busqueda);
+  e.preventDefault();
+  $('#Buscar-nombre')[0].reset();
+});
+
+function search(CAT,busqueda){
   $.ajax({
     url:'Model/m_filtros.php',
     type:'POST',
-    data:{function:"f1",busqueda:busqueda,CAT:CAT},
-    success: function(result){
-    
+    data:{function:"f4",busqueda:busqueda,CAT:CAT},
+    success: function(e){
+     console.log(e);
+     localStorage.setItem("STOCK",JSON.stringify(e));
+     Precio();
     }
   });
-  e.preventDefault();
-});
+}
+
 $('.categoria').click(function(){
   var S=0;
   var ID = $(this).prop('value');
