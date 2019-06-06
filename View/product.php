@@ -117,14 +117,7 @@
 							</div>
 							<p><?php echo $product->descripcion?></p>
 							<div class="add-to-cart">
-								<div class="qty-label">
-									Cantidad
-									<div class="input-number">
-										<input type="number" value="1" disabled>
-										<span class="qty-up">+</span>
-										<span class="qty-down">-</span>
-									</div>
-								</div>
+		
 								<button value="<?php echo $product->id_Producto ?>" class="add-to-cart-btn" ><i class="fa fa-shopping-cart"></i> Añadir al carrito</button>
 								<div  id="<?php echo $product->id_Producto; ?>C" style="visibility: hidden"><?php echo $product->fk_Categoria ?></div>
 							</div>

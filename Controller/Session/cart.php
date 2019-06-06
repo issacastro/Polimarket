@@ -21,6 +21,7 @@
         if(!isset($cart[$item->id_Producto])){ //Checa si el producto ya esta en el carrito
         //if(in_array($item,$cart)){ 
             $ID=$item->id_Producto;
+            $item->cnt=1;
             //$item->stock=$cnt;
            // $cart +=  [ "$ID" => $item ] ; //Agrega el item al carrito
             //unset($_SESSION['cart']);
@@ -33,17 +34,22 @@
 
             //$cnt=+$item->stock;
             //$_SESSION['cnt']=$cnt;
-            return 1;
+           
         } else {
-           return 0;
+            $cart[$item->id_Producto]->cnt+=1;
         }
+        $cart=$_SESSION['cart'];
+        return $cart[$item->id_Producto];
     }
 
     function delete($id_item){
         $cart=$_SESSION['cart']; //lee el carrito
         //$_SESSION['cnt']-=$cart[$id_item]->stock;
+        $cart[$id_item]->cnt-=1;
+        if($cart[$id_item]->cnt<=0){
         unset($cart[$id_item]); //elimina el item del carrito
         unset($_SESSION['cart']);
+        }
         $_SESSION['cart']=$cart; //guarda el arreglo actualizado
     }
 
@@ -80,6 +86,7 @@
                         $p->stock = $item->stock;
                         $p->status = $item->status;
                         $p->img = $item->img;
+                        $p->cnt = $_SESSION['cart'][$item->id_Producto]->cnt;
                         $productos += [ "$i" => $p ];
                         $i++;
                     }

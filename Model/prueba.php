@@ -29,5 +29,6 @@ echo SRV("Mascotas");
  //$_SESSION['FCOUNT'] = $filecount;
  //$_SESSION['IMG'] = $img;
 //echo $img[0];
-echo date("Ydis");;
+//echo date("Ydis");;
+echo "PERRO";
 ?>

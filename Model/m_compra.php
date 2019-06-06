@@ -43,21 +43,21 @@ function getlist(){
     $productos=lista();
     $final=array();
     $comprador=getComprador();
-
-    $stmt = "SELECT ID_PRODUCTO, PRECIO  from Producto where ID_PRODUCTO = ?";  
+    //$stmt = "SELECT ID_PRODUCTO, PRECIO  from Producto where ID_PRODUCTO = ?";  
     foreach($productos as $item){
-        $conn=conexion(SRV($item->fk_Categoria));
-        $params = array($item->id_Producto);
-        $query = sqlsrv_query( $conn, $stmt, $params);
 
-        if($result = sqlsrv_fetch_array($query, SQLSRV_FETCH_ASSOC)){
+      //  $conn=conexion(SRV($item->fk_Categoria));
+      //  $params = array($item->id_Producto);
+       // $query = sqlsrv_query( $conn, $stmt, $params);
+
+        //if($result = sqlsrv_fetch_array($query, SQLSRV_FETCH_ASSOC)){
             $compras=new compra();
-            $compras->fk_Producto = $result['ID_PRODUCTO'];
+            $compras->fk_Producto = $item->id_Producto;//$result['ID_PRODUCTO'];
             $compras->fk_comprador = $comprador;
-            $compras->cantidad = $_POST[$result['ID_PRODUCTO']];
-            $compras->total = intval ($_POST[$result['ID_PRODUCTO']])*intval( $result['PRECIO']);
+            $compras->cantidad = $item->cnt;
+            $compras->total = $item->cnt*$item->precio;//intval ($_POST[$result['ID_PRODUCTO']])*intval( $result['PRECIO']);
             $final += [ "$compras->fk_Producto" => $compras ];
-        }
+       // }
     }
     return $final;
 }

@@ -12,7 +12,10 @@ $('.eliminarc').click(function(){
       }
     });
   });
-
+$('#PAAGAR').click(function() {
+  alert("PERRO YA VAS A PAGAR");
+  
+})
   function obtenerC(){
     $.ajax({
       url:'Model/obtenercarrito.php',

@@ -102,7 +102,7 @@ $.ajax({
     let template =``;
     var  producto = JSON.parse(e);
     //alert(producto.nombre);
-    if(producto.stock!=0){
+    if((producto.stock-producto.cnt)>=0){
     template=Prodcuto(producto,template);
     $("#myModal").modal();
     $('#Mensaje').html("Listo ya lo agregamos al carrito !");
@@ -129,6 +129,7 @@ $.ajax({
     $('#Mensaje2').html("Algo salio mal :c");
     $('#PRODUCTO2').html(template);
   }
+  obtenerC();
 })
 
  function Carrito(producto,template){
@@ -153,7 +154,7 @@ $.ajax({
   </div>
   <div class="product-body">
       <h3 class="product-name"><a href="#">${producto.nombre}</a></h3>
-      <h4 class="product-price"><span class="qty">${producto.stock}x</span>$${producto.precio}</h4>
+      <h4 class="product-price"><span class="qty">${producto.cnt}x</span>$${producto.precio}</h4>
   </div>
   <button value="${producto.id_Producto}" class="delete eliminarc">x</button>
 </div>
@@ -198,8 +199,8 @@ $.ajax({
         var  producto = JSON.parse(JSON.stringify(data[i]));
         template = Carrito(producto,template);
         if(producto.stock!=0){
-        items+=1;
-        total+=producto.precio;
+        items+=producto.cnt*1;
+        total+=producto.cnt*producto.precio;
       }
       }
       document.getElementById("nump").innerHTML = items;
