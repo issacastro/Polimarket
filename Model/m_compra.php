@@ -86,7 +86,9 @@ function getlist(){
        }
     }
     print_r($params);
-    echo $query;
+    //echo $query;
+
+
  echo "BIEN";
 
 ?>

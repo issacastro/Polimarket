@@ -202,10 +202,10 @@
 							<h3 class="title">Top Ventas</h3>
 							<div class="section-nav">
 								<ul class="section-tab-nav tab-nav">
-									<li class="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>
-									<li><a data-toggle="tab" href="#tab2">Smartphones</a></li>
-									<li><a data-toggle="tab" href="#tab2">Camaras</a></li>
-									<li><a data-toggle="tab" href="#tab2">Accesorios</a></li>
+									<li class="active"><a data-toggle="tab" href="#tab2">Herramientas</a></li>
+									<li><a data-toggle="tab" href="#tab2">Moda</a></li>
+									<li><a data-toggle="tab" href="#tab2">Mascotas</a></li>
+									<li><a data-toggle="tab" href="#tab2">Celulares</a></li>
 								</ul>
 							</div>
 						</div>

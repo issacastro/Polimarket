@@ -10,6 +10,7 @@ include '../Controller/Session/session.php';
     }else{
     echo json_encode(lista());
     }
+    $_SESSION['PAGO'] = serialize(lista());
     //sqlsrv_close($conn); 
 
 ?>

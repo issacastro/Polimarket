@@ -8,6 +8,7 @@
 			require '../View/Gen/header.php';
 		}
 		//include '../Model/m_compra.php';
+		
 		include "../Model/m_product.php";
 		
 
@@ -83,20 +84,16 @@
 							</div>
 							<div class="order-products">
 							<?php 
-							      $total=0;
-								  $pe=lista();
+								  $total=0;
+								  $pe= unserialize($_SESSION['PAGO']);
 								   foreach ($pe as $p) {
 								?>
 								<div class="order-col">
 									<div>
-									<div class="input-number price-min PrecioF">
-									<input id="<?php echo $p->id_Producto;?>" name="<?php echo $p->id_Producto;?>" type="number" value="1">
-									<span class="qty-up">+</span>
-									<span class="qty-down">-</span>
-								</div>
-									 <?php echo $p->nombre;?></div>
+									<input id="<?php echo $p->id_Producto;?>" name="<?php echo $p->id_Producto;?>" value="<?php echo $p->cnt;?>" type="hidden" readonly="readonly">
+									 <?php echo $p->cnt."x   "; echo $p->nombre;?></div>
 									<div><?php echo "$ ".$p->precio;
-									$total+=$p->precio; ?></div>
+									$total+=$p->precio*$p->cnt; ?></div>
 								</div>
 								   <?php }?>
 							</div>
