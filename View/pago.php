@@ -9,6 +9,7 @@
 		}
 		//include '../Model/m_compra.php';
 		include "../Model/m_product.php";
+		
 
 	?>
 	

@@ -67,6 +67,7 @@ $(document).ready(function(){
   var ID = $(this).prop('value');
   var CAT = document.getElementById(ID+"C").innerHTML
   //alert(ID);
+  //alert(CAT);
   $.ajax({
     url:'Model/m_mostrar.php',
     type:'POST',

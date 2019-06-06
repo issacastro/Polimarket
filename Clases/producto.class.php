@@ -1,5 +1,4 @@
 <?php
-
 class Producto { 
     public $id_Producto; 
     public $fk_Escuela; 

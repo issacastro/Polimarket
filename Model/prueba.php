@@ -3,7 +3,7 @@ include 'm_product.php';
 include '../Clases/producto.class.php';
 require '../Controller/Session/session.php';
 require '../Controller/Session/cart.php';
-echo SRV("Mascotas");
+//echo SRV("Mascotas");
  //echo json_encode(getProducts());
  //echo json_encode($_POST['F']);
  //echo $_POST['size']
@@ -30,5 +30,7 @@ echo SRV("Mascotas");
  //$_SESSION['IMG'] = $img;
 //echo $img[0];
 //echo date("Ydis");;
-echo "PERRO";
+
+print_r (getProductTOP("Electronica"));
+
 ?>
