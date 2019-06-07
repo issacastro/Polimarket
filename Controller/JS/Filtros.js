@@ -172,9 +172,6 @@ function Precio(){
 
           }
           $('#STOCK').html('');
-          template +=`
-          <script src="Controller/JS/Ajax.js"></script>
-          `;
           $(template).appendTo('#STOCK');
          // location.reload();
           

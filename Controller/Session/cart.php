@@ -34,12 +34,13 @@
 
             //$cnt=+$item->stock;
             //$_SESSION['cnt']=$cnt;
-           
+            $cart=$_SESSION['cart'];
+            return $cart[$item->id_Producto];
         } else {
             $cart[$item->id_Producto]->cnt+=1;
+            return "Ya esta";
         }
-        $cart=$_SESSION['cart'];
-        return $cart[$item->id_Producto];
+
     }
 
     function delete($id_item){

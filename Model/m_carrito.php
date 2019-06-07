@@ -8,7 +8,12 @@ include '../Controller/Session/session.php';
     $item=getProduct($_POST['ID'],$_POST['CAT']);
     if($item->stock!=0){
     $carrito=insert($item);
-    echo json_encode($carrito);
+    if($carrito=="Ya esta"){
+        echo 404;
+    }else {
+        echo json_encode($carrito);
+    }
+  
     }else{
     echo 1;
     }

@@ -2,6 +2,7 @@ $(document).ready(function(){
     console.log('Peticones Corriendo');
     obtenerC();
     obtenerP();
+    PERFIL();
     $.getJSON("Resources/data/categorias.json", function (data) {
       $.each(data.Categorias, function (i, data) {
           var div_data = "<option value=" + data.Categoria + ">" + data.Categoria + "</option>";
@@ -60,6 +61,17 @@ $(document).ready(function(){
     e.preventDefault();
     $('#register-form')[0].reset();
   })
+  $(document).on('click','.add-to-compare',function(){
+    var ID = $(this).prop('value');
+    var CAT = document.getElementById(ID+"C").innerHTML
+    var USR = document.getElementById("NICK").innerHTML
+    alert(ID);
+    alert(CAT);
+    alert(USR);
+
+
+  });
+
   $(document).on('click','.quick-view',function(){
   var SESSION=$("#SESSION").prop('value');
   //alert(SESSION);
@@ -99,7 +111,7 @@ $.ajax({
   data:{ID:ID,CAT:CAT},
   success: function(e){   
     //alert(e);
-    if(e!=1){
+    if(e!="Ya esta"){
     let template =``;
     var  producto = JSON.parse(e);
     //alert(producto.nombre);
@@ -116,8 +128,8 @@ $.ajax({
       $('#Mensaje').html("Algo salio mal :c");
       $('#PRODUCTO').html(template);
     }
-  }else{
-    let template =`Cuand realices tu compra podras elejir la cantidad de este producto`;
+  }if(e==404){
+    let template =`En el carrito puedes eliminarlo si lo agregaste sin querer :c`;
     $("#myModal").modal();
     $('#Mensaje').html("! Ya esta en el Carrito!");
     $('#PRODUCTO').html(template);
@@ -269,6 +281,8 @@ $.ajax({
         <i class="fa fa-star"></i>
       </div>
       <div class="product-btns">
+      <input id="${producto.id_Producto}"type="hidden" value="${producto.fk_Categoria}">
+      <div  id="${producto.id_Producto}C" style="visibility: hidden">${producto.fk_Categoria}</div>
       <button value="${producto.id_Producto}"class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Ver</span></button>
 </div>
     </div>
@@ -279,19 +293,103 @@ $.ajax({
   return template;
  }
 
+ function Publicaciones(producto,template){
+  // alert(JSON.stringify(producto))
+  template +=`
+  <div class="col-md-4 col-xs-6">
+  <div class="product">
+    <div class="product-img">
+    <center>
+      <img src="${producto.img}"  align="middle" style="width: 220px; height: 200px">
+      
+    </div>
+    <div class="product-body">
+      <p class="product-category">${producto.fk_Categoria}</p>
+      <h3 class="product-name"><a href="#">${producto.nombre}</a></h3>
+      <h5 class="product-name">${producto.fk_Escuela}</h5>
+      <h5 class="product-price">STOCK:${producto.stock}</h5>
+      <p class="product-category">${producto.descripcion}</p>
+      <h4 class="product-price">${producto.precio}<del class="product-old-price">${producto.precio+Math.floor(Math.random()*101)}</del></h4>
+      <div class="product-rating">
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+      </div>
+      <div class="product-btns">
+      <input id="${producto.id_Producto}"type="hidden" value="${producto.fk_Categoria}">
+      <div  id="${producto.id_Producto}C" style="visibility: hidden">${producto.fk_Categoria}</div>
+      <button value="${producto.id_Producto}"class="add-to-compare"><i class="fas fa-exchange-alt"></i><span class="tooltipp">Editar</span></button>
+</div>
+    </div>
+    
+  </div>
+</div>
+  `;
+  return template;
+ }
+
+ 
+ function Compras(producto,template,i){
+  // alert(JSON.stringify(producto))
+  template +=`
+  <div class="col-md-4 col-xs-6">
+  <div class="product">
+    <div class="product-img">
+    <center>
+      <img src="${producto.img}"  align="middle" style="width: 220px; height: 200px">
+      
+    </div>
+    <div class="product-body">
+      <p class="product-category">${producto.cat}</p>
+      <h2><a>${producto.nombre}</a></h2>
+      <h6 class="product-name">Compra #${producto.id_Compra}</h6>
+      <h6 class="product-price">${producto.cantidad} items</h6>
+      <p class="product-category">${i} ${producto.usr}</p>
+      <h4 class="product-price">Precio ${producto.precio}</h4>
+      <div class="product-rating">
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+      </div>
+      <h6 class="product-name">Total</h6>
+      <h6 class="product-price">${producto.total}</h6>
+      <div class="product-btns">
+      <input id="${producto.id_Compra}"type="hidden" value="${producto.cat}">
+      <div  id="${producto.id_Compra}C" style="visibility: hidden">${producto.cat}</div>
+      <button value="${producto.id_Compra}"class="add-to-wishlist"><i class="fas fa-trash-alt"></i><span class="tooltipp">Cancelar Compra</span></button>
+</div>
+    </div>
+    
+  </div>
+</div>
+  `;
+  return template;
+ }
+
 $(document).on('click','#Compras',function(){
-  alert("Compras");
+  //alert("Compras");
   var ID = document.getElementById("NICK").innerHTML
-alert(ID);
+//alert(ID);
 $.ajax({
   url:'Model/m_perfil.php',
     type:'POST',
     data:{function:"f1",ID:ID},
     success: function(e){   
+      //alert(e);
+      let template=``;
       var datos = JSON.parse(e);
      if(datos!=""){
-      alert("Lleno");
-      alert(e);
+      //alert("Lleno");
+      var size = Object.keys(datos).length;
+      for(var i =1;i<=size;i++){
+        var  producto = JSON.parse(JSON.stringify(datos[i]));
+        template = Compras(producto,template,"Vendedor");
+      }
+      $('#PERFIL').html(template);
      }else{
       alert("Vacio");
      }
@@ -304,16 +402,23 @@ $.ajax({
 
 $(document).on('click','#Ventas',function(){
   var ID = document.getElementById("NICK").innerHTML
-alert("Ventas");
+//alert("Ventas");
 $.ajax({
   url:'Model/m_perfil.php',
     type:'POST',
     data:{function:"f2",ID:ID},
     success: function(e){   
-      alert(e);
+      //alert(e);
+      let template=``;
       var datos = JSON.parse(e);
      if(datos!=""){
-      alert("Lleno");
+          //alert("Lleno");
+          var size = Object.keys(datos).length;
+          for(var i =1;i<=size;i++){
+            var  producto = JSON.parse(JSON.stringify(datos[i]));
+            template = Compras(producto,template,"Comprador");
+          }
+          $('#PERFIL').html(template);
      }else{
       alert("Vacio");
      }
@@ -326,16 +431,22 @@ $.ajax({
 
 $(document).on('click','#Publick',function(){
   var ID = document.getElementById("NICK").innerHTML
-alert("Publicacines");
+//alert("Publicacines");
 $.ajax({
   url:'Model/m_perfil.php',
     type:'POST',
     data:{function:"f3",ID:ID},
     success: function(e){  
-      alert(e); 
+     // alert(e); 
+      let template=``;
       var datos = JSON.parse(e);
      if(datos!=""){
-      alert("Lleno");
+      var size = Object.keys(datos).length;
+      for(var i =1;i<=size;i++){
+        var  producto = JSON.parse(JSON.stringify(datos[i]));
+        template = Publicaciones(producto,template);
+      }
+      $('#PERFIL').html(template);
      }else{
       alert("Vacio");
      }
@@ -343,25 +454,113 @@ $.ajax({
     }
 
 });
+});
 
+$(document).on('click','#ACTUALIZAR',function(){
+//$("#EdicionModal").modal();
+var ID = $("#Nombre").val();
+var Email = $("#Email").val();
+var Password = $("#Password").val();
+//alert(ID);
+//alert(Email);
+//alert(Password);
+$.ajax({
+  url: 'Model/m_perfil.php',
+  type:'POST',
+  data:{function:"f5",ID:ID,Email:Email,Password:Password},
+  success: function(e){
+    //alert(e);
+    Datos(e);
+    var datos = JSON.parse(e);
+    let template=`
+    Estos son tus nuevos datos ${datos.ID_Nick}
+    `;
+    $('#Titulo').html(template);
+    template=`
+    <div class="card-body centered form-group">
+    <br>
+   <input id="Email-N" class="input-cant text-center" type="text" readonly ="readonly "placeholder="${datos.email}">
+   <i class="bar"></i>
+   <br>
+   <input  id="Password-N" class="input-cant text-center" type="password" placeholder="${datos.password}" readonly ="readonly" >
+ <i class="bar"></i>
+ </div>
+    `;
+    $('#Cuerpo').html(template);
+    template=`
+    <div class="col-md-5 col-md-push-2">
+    <button id="ACTUALIZAR-N" class="primary-btn text-center" >Va !</button>
+    </div>
+    `;
+    $('#Botones').html(template);
+    $("#EdicionModal").modal();
+  }
+});
+})
+$(document).on('click','#ACTUALIZAR-N',function(){
+  $("#EdicionModal").modal('hide');
 })
 
 $(document).on('click','#Datos',function(){
   var ID = document.getElementById("NICK").innerHTML
-alert("Datos");
+//alert("Datos");
 $.ajax({
   url:'Model/m_perfil.php',
     type:'POST',
     data:{function:"f4",ID:ID},
-    success: function(e){   
-      alert(e);
-      var datos = JSON.parse(e);
-     if(datos!=""){
-      alert("Lleno");
-     }else{
-      alert("Vacio");
-     }
+    success: function(e){
+      Datos(e);
     }
 });
 })
+
+function PERFIL(){
+  let template=`
+  
+  
+<div class="card-body centered form-group">
+<div class="col-md-8 col-md-push-3">
+    <h2> Estas en tu Perfil</h2>
+</div>
+</div>
+<div class="col-md-8 col-md-push-3">
+<p>Aqui podras ver tus datos de contacto, tus compras realizadas , tus ventas y publicaciones</p>
+<p>Tambien podras cancelar tus compras o mantener actualizadas tus publicaciones o pausarlas</p>
+</div>
+<div class="card-body centered form-group">
+<div class="col-md-8 col-md-push-4">
+<a href="/POLIMARKET">
+        <img src="View/img/Market.png"align="middle" style="width: 220px; height: 200px">
+   </a>
+</div>
+</div> 
+  `;
+  $('#PERFIL').html(template);
+}
+function Datos(e){   
+  //   alert(e);
+     var datos = JSON.parse(e);
+   let template =`
+           
+   <div class="card-body centered form-group">
+   <div class="col-md-9 col-md-push-3">
+    <h2> Datos de Usuario</h2>
+   </div>
+   <br>
+     <input  id="Nombre" class="input-cant text-center" type="text" placeholder="Nombre de Usuario" readonly="readonly" value="${datos.ID_Nick}">
+     <i class="bar"></i>
+     <br>
+     <input id="Email" class="input-cant text-center" type="text" placeholder="Correo Electronico"  value="${datos.email}">
+     <i class="bar"></i>
+     <br>
+     <input  id="Password" class="input-cant text-center" type="password" placeholder="Contraseña de usuario" value="${datos.password}">
+     <i class="bar"></i>
+     <br>
+     <div class="col-md-5 col-md-push-4">
+     <button id="ACTUALIZAR" class="primary-btn text-center" >Actualizar !</button>
+     </div>
+</div>
+   `;
+   $('#PERFIL').html(template);
+   }
 });

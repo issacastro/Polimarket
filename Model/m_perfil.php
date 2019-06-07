@@ -28,6 +28,11 @@ $ID=$_POST['ID'];
         $d = action4($ID);
             echo json_encode($d);
             break;
+        case 'f5': 
+//Productos por escuela
+        $d = action5($ID);
+            echo json_encode($d);
+            break;
     }
 }
 function action1($ID){
@@ -64,7 +69,7 @@ function action1($ID){
   return $compras; 
 }
 function action2($ID){
-    $stmt="SELECT T3.ID_COMPRAS,T.FK_USER AS USR,T2.NOMBRE,T3.CANTIDAD,T2.PRECIO,T3.TOTAL,T2.IMG,T2.FK_CATEGORIA AS CAT FROM Vendedor AS T
+    $stmt="SELECT T3.ID_COMPRAS,T4.FK_USER AS USR,T2.NOMBRE,T3.CANTIDAD,T2.PRECIO,T3.TOTAL,T2.IMG,T2.FK_CATEGORIA AS CAT FROM Vendedor AS T
     INNER JOIN Producto AS T2 
     ON T.ID_VENDEDOR = T2.FK_VENDEDOR
     INNER JOIN Compras AS T3
@@ -122,4 +127,21 @@ function action4($ID){
     }
     return $USR;
 }
+function action5($ID){
+    $stmt="UPDATE Usuarios SET EMAIL= ?, PASSWORD = ? WHERE ID_USER= ?";
+    $params=array($_POST['Email'],$_POST['Password'],$ID);
+    $conn=conexion(1);
+    $query = sqlsrv_query($conn, $stmt,$params);
+    $stmt="SELECT * FROM Usuarios WHERE ID_USER= ?";
+    $params=array($ID);
+    $query = sqlsrv_query($conn, $stmt,$params);
+    if($result = sqlsrv_fetch_array($query, SQLSRV_FETCH_ASSOC)){
+    $USR = new Usuario();
+    $USR->ID_Nick=$result['ID_USER'];
+    $USR->email=$result['EMAIL'];
+    $USR->password=$result['PASSWORD'];
+    }
+    return $USR;
+}
+
 ?>
