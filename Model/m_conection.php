@@ -2,16 +2,19 @@
 function conexion($server){
 switch($server) {
     case 1: 
-    //$IP="10.104.103.119";
-    $IP="25.19.146.81";
+    //$IP="10.104.102.191";
+    $IP="10.104.107.147";
+    //$IP="170.6.0.29";
     $Instance="REDMI";
     $DataBase="B";
     $UID="SA";
     $PWD="Strayheart123";
         break;
     case 2: 
-        //$IP="10.104.103.52";
-        $IP="25.3.56.100";
+    //$IP="170.6.0.20";
+    $IP="10.104.108.33";
+        //$IP="25.3.56.100";
+        //$Instance="VITE";
         $Instance="VITE";
         $DataBase="B";
         $UID="SA";

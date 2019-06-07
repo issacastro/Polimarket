@@ -1,6 +1,6 @@
 <?php
 
-$IP="25.19.146.81";
+$IP="10.104.107.147";
 //$IP="10.104.103.119"  ;
 $Instance="REDMI";
 $DataBase="B";
@@ -26,7 +26,7 @@ $connectionInfo = array( "Database"=>$DataBase, "UID"=>$UID, "PWD"=>$PWD,"Charac
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
 if($conn){
-    echo $conn;
+    //echo $conn;
 } else{
     //echo 'Ocurrio un error de conexion';
 }

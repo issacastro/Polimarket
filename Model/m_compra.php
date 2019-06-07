@@ -55,6 +55,7 @@ function getlist(){
             $compras->fk_Producto = $item->id_Producto;//$result['ID_PRODUCTO'];
             $compras->fk_comprador = $comprador;
             $compras->cantidad = $item->cnt;
+            $compras->cat = $item->fk_Categoria;
             $compras->total = intval ($item->cnt)*intval ($item->precio);//intval ($_POST[$result['ID_PRODUCTO']])*intval( $result['PRECIO']);
             $final += [ "$compras->fk_Producto" => $compras ];
        // }
@@ -65,13 +66,14 @@ function getlist(){
 
  
 
-    $conn= conexion(1);
+   // $conn= conexion(2);
     
     $items=getlist();
     $id_compra=getID();
     $stmt = "INSERT INTO  Compras values (?,?,?,?,?)";  
     
     foreach($items as $comp){
+        $conn= conexion(SRV($comp->cat));
         $params =array();
         $params = array( 
                         $id_compra,
@@ -81,8 +83,11 @@ function getlist(){
                          $comp->total
                     );
        $query = sqlsrv_query( $conn, $stmt, $params);
+       $stmt = "UPDATE  Producto SET Stock= ?  WHERE ID_PRODUCTO = ?"; 
        if($query){
-            echo "awebo";
+            
+            $_SESSION['cart']=array();
+            header("Location: perfil");
        }
     }
     print_r($params);

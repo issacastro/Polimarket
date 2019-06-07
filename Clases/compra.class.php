@@ -5,6 +5,7 @@ class compra {
     public $fk_comprador;
     public $cantidad;
     public $total;
+    public $cat;
 } 
 
 ?>
