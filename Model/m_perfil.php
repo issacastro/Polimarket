@@ -36,7 +36,7 @@ $ID=$_POST['ID'];
     }
 }
 function action1($ID){
-    $stmt="SELECT T3.ID_COMPRAS,T.FK_USER AS USR,T2.NOMBRE,T3.CANTIDAD,T2.PRECIO,T3.TOTAL,T2.IMG,T2.FK_CATEGORIA AS CAT FROM Vendedor AS T
+    $stmt="SELECT T3.ID_COMPRAS,T.FK_USER AS USR,T2.NOMBRE,T3.CANTIDAD,T2.PRECIO,T3.TOTAL,T2.IMG,T2.FK_CATEGORIA AS CAT,T2.ID_PRODUCTO FROM Vendedor AS T
     INNER JOIN Producto AS T2 
     ON T.ID_VENDEDOR = T2.FK_VENDEDOR
     INNER JOIN Compras AS T3
@@ -60,7 +60,8 @@ function action1($ID){
         $pr->precio = $result['PRECIO'];
         $pr->total = $result['TOTAL']; 
         $pr->img = $result['IMG']; 
-        $pr->cat = $result['CAT'];  
+        $pr->cat = $result['CAT']; 
+        $pr->id_Producto = $result['ID_PRODUCTO']; 
         $compras+=[ "$i" => $pr ];
         $i++;
     }
@@ -69,7 +70,7 @@ function action1($ID){
   return $compras; 
 }
 function action2($ID){
-    $stmt="SELECT T3.ID_COMPRAS,T4.FK_USER AS USR,T2.NOMBRE,T3.CANTIDAD,T2.PRECIO,T3.TOTAL,T2.IMG,T2.FK_CATEGORIA AS CAT FROM Vendedor AS T
+    $stmt="SELECT T3.ID_COMPRAS,T4.FK_USER AS USR,T2.NOMBRE,T3.CANTIDAD,T2.PRECIO,T3.TOTAL,T2.IMG,T2.FK_CATEGORIA AS CAT,T2.ID_PRODUCTO FROM Vendedor AS T
     INNER JOIN Producto AS T2 
     ON T.ID_VENDEDOR = T2.FK_VENDEDOR
     INNER JOIN Compras AS T3
@@ -94,6 +95,7 @@ function action2($ID){
         $pr->total = $result['TOTAL']; 
         $pr->img = $result['IMG'];
         $pr->cat = $result['CAT'];  
+        $pr->id_Producto = $result['ID_PRODUCTO']; 
         $compras+=[ "$i" => $pr ];
         $i++;
     }

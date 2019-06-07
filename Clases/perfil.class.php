@@ -8,6 +8,7 @@ class Perfil {
     public $total;
     public $img;
     public $cat;
+    public $id_Producto;
 } 
 
 ?>

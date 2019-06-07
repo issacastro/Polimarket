@@ -358,9 +358,20 @@ $.ajax({
       <h6 class="product-name">Total</h6>
       <h6 class="product-price">${producto.total}</h6>
       <div class="product-btns">
-      <input id="${producto.id_Compra}"type="hidden" value="${producto.cat}">
-      <div  id="${producto.id_Compra}C" style="visibility: hidden">${producto.cat}</div>
-      <button value="${producto.id_Compra}"class="add-to-wishlist"><i class="fas fa-trash-alt"></i><span class="tooltipp">Cancelar Compra</span></button>
+      <input id="${producto.id_Producto}"type="hidden" value="${producto.cat}">
+      <div  id="${producto.id_Producto}C" style="visibility: hidden">${producto.cat}</div>`;
+      if(i=="Vendedor"){
+        template+=`
+        <input id="${producto.id_Compra}"type="hidden" value="${producto.cat}">
+        <div  id="${producto.id_Compra}C" style="visibility: hidden">${producto.cat}</div>
+        <button value="${producto.id_Compra}"class="add-to-wishlist"><i class="fas fa-trash-alt"></i><span class="tooltipp">Cancelar Compra</span></button>
+        `;
+      }else{
+        template+=`
+        <button value="${producto.id_Producto}" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Ver</span></button>
+        `;
+      }
+      template+=`
 </div>
     </div>
     
