@@ -279,4 +279,89 @@ $.ajax({
   return template;
  }
 
+$(document).on('click','#Compras',function(){
+  alert("Compras");
+  var ID = document.getElementById("NICK").innerHTML
+alert(ID);
+$.ajax({
+  url:'Model/m_perfil.php',
+    type:'POST',
+    data:{function:"f1",ID:ID},
+    success: function(e){   
+      var datos = JSON.parse(e);
+     if(datos!=""){
+      alert("Lleno");
+      alert(e);
+     }else{
+      alert("Vacio");
+     }
+
+    }
+
+});
+
+})
+
+$(document).on('click','#Ventas',function(){
+  var ID = document.getElementById("NICK").innerHTML
+alert("Ventas");
+$.ajax({
+  url:'Model/m_perfil.php',
+    type:'POST',
+    data:{function:"f2",ID:ID},
+    success: function(e){   
+      alert(e);
+      var datos = JSON.parse(e);
+     if(datos!=""){
+      alert("Lleno");
+     }else{
+      alert("Vacio");
+     }
+
+    }
+
+});
+
+})
+
+$(document).on('click','#Publick',function(){
+  var ID = document.getElementById("NICK").innerHTML
+alert("Publicacines");
+$.ajax({
+  url:'Model/m_perfil.php',
+    type:'POST',
+    data:{function:"f3",ID:ID},
+    success: function(e){  
+      alert(e); 
+      var datos = JSON.parse(e);
+     if(datos!=""){
+      alert("Lleno");
+     }else{
+      alert("Vacio");
+     }
+
+    }
+
+});
+
+})
+
+$(document).on('click','#Datos',function(){
+  var ID = document.getElementById("NICK").innerHTML
+alert("Datos");
+$.ajax({
+  url:'Model/m_perfil.php',
+    type:'POST',
+    data:{function:"f4",ID:ID},
+    success: function(e){   
+      alert(e);
+      var datos = JSON.parse(e);
+     if(datos!=""){
+      alert("Lleno");
+     }else{
+      alert("Vacio");
+     }
+    }
+});
+})
 });

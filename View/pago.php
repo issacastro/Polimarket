@@ -122,6 +122,8 @@
 			</div>
 			<!-- /container -->
 		</div>
+
+		</div>
 		<!-- /SECTION -->
      
 		<!-- /SECTION -->

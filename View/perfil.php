@@ -16,13 +16,14 @@
 					<!-- section title -->
 					<div class="col-md-12">
 						<div class="section-title">
-							<h3 class="title">! Hola ! <?php echo $usr->ID_Nick?></h3>
+						<h3 class="title">! Hola !</h3>
+							<h3 id="NICK"class="title"><?php echo $usr->ID_Nick?></h3>
 							<div class="section-nav">
 								<ul class="section-tab-nav tab-nav">
-									<li class="active"><a data-toggle="tab" href="#tab2">Tus Datos </a></li>
-									<li><a data-toggle="tab" href="#tab2">Compras</a></li>
-									<li><a data-toggle="tab" href="#tab2">Ventas</a></li>
-									<li><a data-toggle="tab" href="#tab2">Publicaciones</a></li>
+									<li class="active"><a id="Datos" data-toggle="tab" href="#tab2">Tus Datos </a></li>
+									<li><a id="Compras" data-toggle="tab" href="#tab2">Compras</a></li>
+									<li><a id="Ventas" data-toggle="tab" href="#tab2">Ventas</a></li>
+									<li><a id="Publick" data-toggle="tab" href="#tab2">Publicaciones</a></li>
 								</ul>
 							</div>
 						</div>
@@ -40,7 +41,7 @@
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-                
+                <div id="PERFIL"></div>
                 </div>
 				<!-- /row -->
 			</div>
