@@ -74,11 +74,21 @@ $(document).on('click','.add-to-wishlist',function(){
   var ID = $(this).prop('value');
   var CAT = document.getElementById(ID+"C").innerHTML
   var ID_P = document.getElementById(ID+"P").innerHTML
+  var ITEMS = document.getElementById(ID+"I").innerHTML
   var USR = document.getElementById("NICK").innerHTML
-  alert(ID);
-  alert(CAT);
-  alert(ID_P);
-  alert(USR);
+  //alert(ID);
+  //alert(CAT);
+  //alert(ID_P);
+  //alert(ITEMS);
+  $.ajax({
+    url:'Model/m_perfil.php',
+    type: 'POST',
+    data:{function:"f6",ID:ID,CAT:CAT,ID_P:ID_P,ITEMS:ITEMS},
+    success: function (e){
+      getCompras(USR)
+    }
+ 
+   });
 });
 
 $(document).on('click','.quick-view',function(){
@@ -354,7 +364,8 @@ template +=`
     <p class="product-category">${producto.cat}</p>
     <h2><a>${producto.nombre}</a></h2>
     <h6 class="product-name">Compra #${producto.id_Compra}</h6>
-    <h6 class="product-price">${producto.cantidad} items</h6>
+    <div  id="${producto.id_Compra}I" style="visibility: hidden">${producto.cantidad}</div>
+    <h6  class="product-price">${producto.cantidad} items</h6>
     <p class="product-category">${i} ${producto.usr}</p>
     <h4 class="product-price">Precio ${producto.precio}</h4>
     <div class="product-rating">
@@ -364,16 +375,27 @@ template +=`
       <i class="fa fa-star"></i>
       <i class="fa fa-star"></i>
     </div>
+    <div  id="${producto.id_Compra}P" style="visibility: hidden">${producto.id_Producto}</div>
+    <input id="${producto.id_Compra}"type="hidden" value="${producto.cat}">
+    <div  id="${producto.id_Compra}C" style="visibility: hidden">${producto.cat}</div>
+    `;
+    if(producto.total!=0 ){
+    template+=`
     <h6 class="product-name">Total</h6>
     <h6 class="product-price">${producto.total}</h6>
     <div class="product-btns">
     <input id="${producto.id_Producto}"type="hidden" value="${producto.cat}">
     <div  id="${producto.id_Producto}C" style="visibility: hidden">${producto.cat}</div>`;
-    if(i=="Vendedor"){
+    }else{
       template+=`
-      <div  id="${producto.id_Compra}P" style="visibility: hidden">${producto.id_Producto}</div>
-      <input id="${producto.id_Compra}"type="hidden" value="${producto.cat}">
-      <div  id="${producto.id_Compra}C" style="visibility: hidden">${producto.cat}</div>
+      <h6 class="product-name">Compra</h6>
+      <h6 class="product-price">CANCELADA</h6>
+      <div class="product-btns">
+      <input id="${producto.id_Producto}"type="hidden" value="${producto.cat}">
+      <div  id="${producto.id_Producto}C" style="visibility: hidden">${producto.cat}</div>`;
+    }
+    if(i=="Vendedor" && producto.total!=0 ){
+      template+=`
       <button value="${producto.id_Compra}"class="add-to-wishlist"><i class="fas fa-trash-alt"></i><span class="tooltipp">Cancelar Compra</span></button>
       `;
     }else{
@@ -394,35 +416,35 @@ return template;
 $(document).on('click','#Compras',function(){
 //alert("Compras");
 var ID = document.getElementById("NICK").innerHTML
+getCompras(ID)
 //alert(ID);
-$.ajax({
-url:'Model/m_perfil.php',
-  type:'POST',
-  data:{function:"f1",ID:ID},
-  success: function(e){   
-    //alert(e);
-    let template=``;
-    var datos = JSON.parse(e);
-   if(datos!=""){
-    //alert("Lleno");
-    var size = Object.keys(datos).length;
-    for(var i =1;i<=size;i++){
-      var  producto = JSON.parse(JSON.stringify(datos[i]));
-      template = Compras(producto,template,"Vendedor");
-    }
-    $('#PERFIL').html(template);
-   }else{
-    //alert("Vacio");
-    let template=`<h>AUN NO HAS COMPRADO NADA</h>`;
-     $('#PERFIL').html(template);
-   }
-
-  }
-
-});
-
 })
-
+function getCompras(ID){
+  $.ajax({
+    url:'Model/m_perfil.php',
+      type:'POST',
+      data:{function:"f1",ID:ID},
+      success: function(e){   
+        //alert(e);
+        let template=``;
+        var datos = JSON.parse(e);
+       if(datos!=""){
+        //alert("Lleno");
+        var size = Object.keys(datos).length;
+        for(var i =1;i<=size;i++){
+          var  producto = JSON.parse(JSON.stringify(datos[i]));
+          template = Compras(producto,template,"Vendedor");
+        }
+        $('#PERFIL').html(template);
+       }else{
+        //alert("Vacio");
+        NOHAS("comprado");
+       }
+    
+      }
+    
+    });
+}
 $(document).on('click','#Ventas',function(){
 var ID = document.getElementById("NICK").innerHTML
 //alert("Ventas");
@@ -443,8 +465,7 @@ url:'Model/m_perfil.php',
         }
         $('#PERFIL').html(template);
    }else{
-       let template=`<h>AUN NO HAS  VENDIDO NADA</h>`;
-     $('#PERFIL').html(template);
+    NOHAS("vendido");
    }
 
   }
@@ -472,8 +493,7 @@ url:'Model/m_perfil.php',
     }
     $('#PERFIL').html(template);
    }else{
-      let template=`<h>AUN NO HAS  PUBLICADO NADA</h>`;
-     $('#PERFIL').html(template);
+    NOHAS("publicado");
    }
 
   }
@@ -562,6 +582,27 @@ let template=`
 `;
 $('#PERFIL').html(template);
 }
+function NOHAS(mns){
+  let template=`
+  
+  
+  <div class="card-body centered form-group">
+  <div class="col-md-12 col-md-push-2">
+    <h2> No has ${mns} nada</h2>
+  </div>
+  </div>
+  <div class="col-md-8 col-md-push-3">
+  </div>
+  <div class="card-body centered form-group">
+  <div class="col-md-8 col-md-push-3">
+  <a href="/POLIMARKET">
+        <img src="View/img/triste.png"align="middle" style="width: 270px; height: 270px">
+   </a>
+  </div>
+  </div> 
+  `;
+  $('#PERFIL').html(template);
+  }
 function Datos(e){   
 //   alert(e);
    var datos = JSON.parse(e);

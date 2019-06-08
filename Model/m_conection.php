@@ -3,7 +3,7 @@ function conexion($server){
 switch($server) {
     case 1: 
     //$IP="10.104.102.191";
-    $IP="10.104.107.147";
+    $IP="170.6.0.29";
     //$IP="170.6.0.29";
     $Instance="REDMI";
     $DataBase="B";
@@ -12,13 +12,12 @@ switch($server) {
         break;
     case 2: 
     //$IP="170.6.0.20";
-    $IP="10.104.108.33";
+    $IP="170.6.0.20";
         //$IP="25.3.56.100";
-        //$Instance="VITE";
-        $Instance="VITE";
+        $Instance="REDMI";
         $DataBase="B";
         $UID="SA";
-        $PWD="Vite123";
+        $PWD="Strayheart123";
             break;
     case 3: 
     $IP="25.75.178.66";

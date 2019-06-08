@@ -70,8 +70,6 @@ function getlist(){
     
     $items=getlist();
     $id_compra=getID();
-    $stmt = "INSERT INTO  Compras values (?,?,?,?,?)";  
-    
     foreach($items as $comp){
         $conn= conexion(SRV($comp->cat));
         $params =array();
@@ -82,8 +80,14 @@ function getlist(){
                          $comp->cantidad,
                          $comp->total
                     );
-       $query = sqlsrv_query( $conn, $stmt, $params);
+       $stmt = "INSERT INTO  Compras values (?,?,?,?,?)";
+       $query = sqlsrv_query( $conn, $stmt, $params); 
        $stmt = "UPDATE  Producto SET Stock= ?  WHERE ID_PRODUCTO = ?"; 
+       $producto = getProduct($comp->fk_Producto,$comp->cat);
+       $newstock = $producto->stock - $comp->cantidad;
+       $params =array($newstock,$comp->fk_Producto);
+       $query = sqlsrv_query( $conn, $stmt, $params);
+       echo SRV($comp->cat);
        if($query){
             
             $_SESSION['cart']=array();
@@ -92,8 +96,8 @@ function getlist(){
     }
     print_r($params);
     //echo $query;
-
-
+    sqlsrv_close($conn); 
+echo $newstock;
  echo "BIEN";
 
 ?>

@@ -24,15 +24,21 @@ $ID=$_POST['ID'];
         echo json_encode($c);
             break;
         case 'f4': 
-//Productos por escuela
+//Mostrar datos de Usuario
         $d = action4($ID);
             echo json_encode($d);
             break;
         case 'f5': 
-//Productos por escuela
+//Actualizar datos de usuario
         $d = action5($ID);
             echo json_encode($d);
             break;
+         case 'f6': 
+//Cancelar compra
+        $e = action6();
+            echo json_encode($e);
+            break;
+
     }
 }
 function action1($ID){
@@ -144,6 +150,18 @@ function action5($ID){
     $USR->password=$result['PASSWORD'];
     }
     return $USR;
+}
+function action6(){
+    $stmt="UPDATE Compras SET TOTAL = 0 WHERE FK_PRODUCTO= ? AND ID_COMPRAS = ?";
+    $params=array($_POST['ID_P'],$_POST['ID']);
+    $conn=conexion(SRV($_POST['CAT']));
+    $query = sqlsrv_query($conn, $stmt,$params);
+    $producto = getProduct($_POST['ID_P'],$_POST['CAT']);
+    $stmt="UPDATE Producto SET STOCK = ? WHERE ID_PRODUCTO= ?";
+    $newstock= $producto->stock + $_POST['ITEMS'];
+    $params=array($newstock,$_POST['ID_P']);
+    $query = sqlsrv_query($conn, $stmt,$params);
+    return $producto;
 }
 
 ?>
