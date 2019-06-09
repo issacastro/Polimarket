@@ -27,16 +27,14 @@ include "../Model/m_product.php";
 			<!-- /container -->
 		</div>
 		<!-- /BREADCRUMB -->
-
-		<!-- SECTION -->
-		<div class="section">
+	<!-- SECTION -->
+	<div class="section">
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
 				<div class="row">
 					<!-- Product main img -->
 					<div class="col-md-5 col-md-push-2">
-					
 						<div id="product-main-img">
 						<?php 
 						$img=$_SESSION['IMG'];
@@ -44,9 +42,12 @@ include "../Model/m_product.php";
 						for($i = 0; $i <$files ; $i++) {
 						?>
 							<div class="product-preview">
-							<img src=" <?php  echo "View/data/".$product->id_Producto."/".$img[$i]; ?>" alt="">
+								<img src="<?php  echo "View/data/".$product->id_Producto."/".$img[$i]; ?>" alt="">
 							</div>
-						<?php }?>
+							<div class="product-preview">
+								<img src="<?php  echo "View/data/".$product->id_Producto."/".$img[$i]; ?>" alt="">
+							</div>
+						<?php } ?>
 						</div>
 					</div>
 					<!-- /Product main img -->
@@ -58,14 +59,16 @@ include "../Model/m_product.php";
 						$img=$_SESSION['IMG'];
 						$files=$_SESSION['FCOUNT'];
 						for($i = 0; $i <$files ; $i++) {
-						?>
+						?>						
 							<div class="product-preview">
-								<img src=" <?php  echo "View/data/".$product->id_Producto."/".$img[$i]; ?>" alt="">
+							<img src="<?php  echo "View/data/".$product->id_Producto."/".$img[$i]; ?>" alt="">
 							</div>
-						<?php } ?>
+							
+						<?php }?>
 						</div>
 					</div>
 					<!-- /Product thumb imgs -->
+
 		  <!-- Modal -->
 		  <div  id="SESION" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -123,11 +126,6 @@ include "../Model/m_product.php";
 								<button value="<?php echo $product->id_Producto ?>" class="add-to-cart-btn" ><i class="fa fa-shopping-cart"></i> Añadir al carrito</button>
 								<div  id="<?php echo $product->id_Producto; ?>C" style="visibility: hidden"><?php echo $product->fk_Categoria ?></div>
 							</div>
-
-							<ul class="product-btns">
-								<li><a href="#"><i class="fas fa-exchange-alt"></i> Comparar</a></li>
-							</ul>
-
 							<ul class="product-links">
 								<li>Categoria:</li>
 								<li><a href="#"><?php echo $product->fk_Categoria ?></a></li>
