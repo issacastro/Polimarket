@@ -363,7 +363,8 @@ template +=`
   <div class="product-body">
     <p class="product-category">${producto.cat}</p>
     <h2><a>${producto.nombre}</a></h2>
-    <h6 class="product-name">Compra #${producto.id_Compra}</h6>
+    <h6 class="product-name">Compra </h6>
+    <h6 class="product-name"> #${producto.id_Compra}</h6>
     <div  id="${producto.id_Compra}I" style="visibility: hidden">${producto.cantidad}</div>
     <h6  class="product-price">${producto.cantidad} items</h6>
     <p class="product-category">${i} ${producto.usr}</p>
