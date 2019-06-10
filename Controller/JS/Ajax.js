@@ -142,7 +142,7 @@ url:'Model/m_perfil.php',
 type:'POST',
 data:{function:"f7",CAT:CAT,ID:ID_PRODUCTO,FK_CATEGORIA:FK_CATEGORIA,FK_ESCUELA:FK_ESCUELA,NOMBRE:NOMBRE,DESCRIPCION:DESCRIPCION,STOCK:STOCK,PRECIO:PRECIO},
 success: function(e){
-  alert(e);
+  //alert(e);
   GETPUBLIC(USR);
   let template =`
   <br>
