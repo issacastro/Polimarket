@@ -38,6 +38,11 @@ $ID=$_POST['ID'];
         $e = action6();
             echo json_encode($e);
             break;
+          case 'f7': 
+//Actualizar Perfil
+        $f = action7();
+            echo json_encode($f);
+            break;
 
     }
 }
@@ -123,9 +128,10 @@ return getProductsF($stmt,$params);
 }
 
 function action4($ID){
+    for($i=1;$i<3;$i++){
     $stmt="SELECT * FROM Usuarios WHERE ID_USER= ?";
     $params=array($ID);
-    $conn=conexion(1);
+    $conn=conexion($i);
     $query = sqlsrv_query($conn, $stmt,$params);
     if($result = sqlsrv_fetch_array($query, SQLSRV_FETCH_ASSOC)){
     $USR = new Usuario();
@@ -133,6 +139,7 @@ function action4($ID){
     $USR->email=$result['EMAIL'];
     $USR->password=$result['PASSWORD'];
     }
+}
     return $USR;
 }
 function action5($ID){
@@ -163,5 +170,36 @@ function action6(){
     $query = sqlsrv_query($conn, $stmt,$params);
     return $producto;
 }
-
+function action7(){
+    $stmt= "
+    EXEC acualizar_publicacion
+    @SRV =?,
+    @ID_PRODUCTO = ?,
+    @FK_ESCUELA = ?,
+    @FK_CATEGORIA= ?,
+    @NOMBRE = ?,
+    @DESCRIPCION = ?,
+    @STOCK = ?,
+    @STATUS = 1,
+    @PRECIO = ?
+        ";
+        $SRV=SRV($_POST['CAT']);
+        $params=array(
+            SRV($_POST['FK_CATEGORIA']),
+            $_POST['ID'],
+            $_POST['FK_ESCUELA'],
+            $_POST['FK_CATEGORIA'],
+            $_POST['NOMBRE'],
+            $_POST['DESCRIPCION'],
+            $_POST['STOCK'],
+            $_POST['PRECIO']
+        );
+        $conn = conexion($SRV);
+        $query = $query = sqlsrv_query($conn, $stmt,$params);
+        if($query){
+            echo $SRV;
+        }else {
+            echo "Mal";
+        }
+}
 ?>

@@ -3,6 +3,9 @@ $(document).ready(function(){
   obtenerC();
   obtenerP();
   PERFIL();
+  GETESCUELAS();
+  GETCATEGORIAS();
+  function GETCATEGORIAS(){
   $.getJSON("Resources/data/categorias.json", function (data) {
     $.each(data.Categorias, function (i, data) {
         var div_data = "<option value=" + data.Categoria + ">" + data.Categoria + "</option>";
@@ -11,6 +14,8 @@ $(document).ready(function(){
     });
     
 });
+}
+function GETESCUELAS(){
 $.getJSON("Resources/data/escuelas.json", function (data) {
   $.each(data.Escuelas, function (i, data) {
       var div_data = "<option value=" + data.Num + ">" + data.Escuela + "</option>";
@@ -18,6 +23,7 @@ $.getJSON("Resources/data/escuelas.json", function (data) {
 
   });
 });
+}
   $('#login-form').submit(function(e){
   let your_name = $('#your_name').val();
   let your_pass = $('#your_pass').val();
@@ -64,12 +70,104 @@ $('#register-form').submit(function(e){
 })
 $(document).on('click','.add-to-compare',function(){
   var ID = $(this).prop('value');
-  var CAT = document.getElementById(ID+"C").innerHTML
-  var USR = document.getElementById("NICK").innerHTML
-  alert(ID);
-  alert(CAT);
-  alert(USR);
+  var CAT = document.getElementById(ID+"C").innerHTML;
+  var NOM = document.getElementById(ID+"NOM").innerHTML;
+  var ESC = document.getElementById(ID+"ESC").innerHTML;
+  var STO = document.getElementById(ID+"STO").innerHTML;
+  var DESC = document.getElementById(ID+"DESC").innerHTML;
+  var PRE = document.getElementById(ID+"PRE").innerHTML;
+  $('#EdicionModal').modal();
+  let template =`<h3>Panel de Edición</h3>`;
+  $('#Titulo').html(template);
+  template =`
+  <!-- Public Form -->
+  <div class="card-body centered form-group">
+       <form  class="review-form" id="product-form"  >
+       <input id="ID_PRODUCTO"type="hidden" value="${ID}">
+         <input id="Nombre" value ="${NOM}" class="input-cant text-center" type="text" placeholder="Nombre de Producto" required>
+         <i class="bar"></i>
+         <textarea  id="Descripcion" class="input-cant" placeholder="Descripcion" required></textarea>
+         <i class="bar"></i>
+         <div class="product-options form-group col-md-5">
+           <label>
+             Cantidad: <input  id="Stock" value ="${STO}" class="input-cant text-center" type="number" required></select>
+             <i class="bar"></i>
+           </label>
+           <label>
+             Precio: <input  id="Precio" value ="${PRE}" class="input-cant text-center" type="text" placeholder="MXN" required>
+             <i class="bar"></i>
+           </label>
+         </div>
+         <div class="product-options form-group">
+           <label>
+           Escuela:<select  id="Escuela"  class="input-s escuelas"><option value ="0">Selecciona</option></select>
+           <i class="bar"></i>
+           </label>
+           <label>
+           Categoria:<select id="Categoria" class="input-s categorias"><option value ="0" >Selecciona</option></select>
+           <i class="bar"></i>
+           </label>
+           </div>
+           <label>
+           <h5>*Las imagenes no se pueden editar*</h5>
+           </label>
+         </form>
+       </div>
+   <!-- /Public Form -->
+  `;
+  $('#Cuerpo').html(template);
+  GETESCUELAS();
+  GETCATEGORIAS();
+  template=`
+  <div class="col-md-5 col-md-push-3">
+  <button id="ACTUALIZAR-P" class="primary-btn text-center" >! Cambiar !</button>
+  </div>
+  `;
+  $('#Botones').html(template);
+  $('#Descripcion').val(DESC);
 });
+
+$(document).on('click','#ACTUALIZAR-P',function(){
+  var USR = document.getElementById("NICK").innerHTML;
+  var ID_PRODUCTO=$('#ID_PRODUCTO').val();
+  var CAT = document.getElementById(ID_PRODUCTO+"C").innerHTML;
+  var FK_ESCUELA=$('#Escuela').val();
+  var FK_CATEGORIA=$('#Categoria').val();
+  var NOMBRE=$('#Nombre').val();
+  var DESCRIPCION=$('#Descripcion').val();
+  var STOCK=$('#Stock').val();
+  var PRECIO=$('#Precio').val();
+$.ajax({
+url:'Model/m_perfil.php',
+type:'POST',
+data:{function:"f7",CAT:CAT,ID:ID_PRODUCTO,FK_CATEGORIA:FK_CATEGORIA,FK_ESCUELA:FK_ESCUELA,NOMBRE:NOMBRE,DESCRIPCION:DESCRIPCION,STOCK:STOCK,PRECIO:PRECIO},
+success: function(e){
+  alert(e);
+  GETPUBLIC(USR);
+  let template =`
+  <br>
+  <br>
+  <br>
+  <div class="col-md-8 col-md-push-3">
+  <h2> Se cambio con Exito</h2>
+</div>
+<br>
+<br>
+<br>
+  `;
+  $('#Cuerpo').html(template);
+  template=`
+  <div class="col-md-5 col-md-push-3">
+  <button id="CERRAR-P" class="primary-btn text-center" data-dismiss="modal" >! Cerrar !</button>
+  </div>
+  `;
+  $('#Botones').html(template);
+
+}
+
+});
+
+})
 $(document).on('click','.add-to-wishlist',function(){
   var ID = $(this).prop('value');
   var CAT = document.getElementById(ID+"C").innerHTML
@@ -323,12 +421,13 @@ template +=`
     
   </div>
   <div class="product-body">
-    <p class="product-category">${producto.fk_Categoria}</p>
-    <h3 class="product-name"><a href="#">${producto.nombre}</a></h3>
-    <h5 class="product-name">${producto.fk_Escuela}</h5>
-    <h5 class="product-price">STOCK:${producto.stock}</h5>
-    <p class="product-category">${producto.descripcion}</p>
-    <h4 class="product-price">${producto.precio}<del class="product-old-price">${producto.precio+Math.floor(Math.random()*101)}</del></h4>
+    <p  class="product-category">${producto.fk_Categoria}</p>
+    <h3  class="product-name"><a id="${producto.id_Producto}NOM" >${producto.nombre}</a></h3>
+    <h5 id="${producto.id_Producto}ESC" class="product-name">${producto.fk_Escuela}</h5>
+    <h5  class="product-price">STOCK</h5>
+    <h5 id="${producto.id_Producto}STO" class="product-price">${producto.stock}</h5>
+    <p id="${producto.id_Producto}DESC" class="product-category">${producto.descripcion}</p>
+    <h4 id="${producto.id_Producto}PRE" class="product-price">${producto.precio}</h4>
     <div class="product-rating">
       <i class="fa fa-star"></i>
       <i class="fa fa-star"></i>
@@ -478,30 +577,32 @@ url:'Model/m_perfil.php',
 $(document).on('click','#Publick',function(){
 var ID = document.getElementById("NICK").innerHTML
 //alert("Publicacines");
-$.ajax({
-url:'Model/m_perfil.php',
-  type:'POST',
-  data:{function:"f3",ID:ID},
-  success: function(e){  
-   // alert(e); 
-    let template=``;
-    var datos = JSON.parse(e);
-   if(datos!=""){
-    var size = Object.keys(datos).length;
-    for(var i =1;i<=size;i++){
-      var  producto = JSON.parse(JSON.stringify(datos[i]));
-      template = Publicaciones(producto,template);
+GETPUBLIC(ID);
+});
+function GETPUBLIC(ID){
+  $.ajax({
+  url:'Model/m_perfil.php',
+    type:'POST',
+    data:{function:"f3",ID:ID},
+    success: function(e){  
+     // alert(e); 
+      let template=``;
+      var datos = JSON.parse(e);
+     if(datos!=""){
+      var size = Object.keys(datos).length;
+      for(var i =1;i<=size;i++){
+        var  producto = JSON.parse(JSON.stringify(datos[i]));
+        template = Publicaciones(producto,template);
+      }
+      $('#PERFIL').html(template);
+     }else{
+      NOHAS("publicado");
+     }
+  
     }
-    $('#PERFIL').html(template);
-   }else{
-    NOHAS("publicado");
-   }
-
+  
+  });
   }
-
-});
-});
-
 $(document).on('click','#ACTUALIZAR',function(){
 //$("#EdicionModal").modal();
 var ID = $("#Nombre").val();
