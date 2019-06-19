@@ -83,5 +83,6 @@ Al realizar la compra se enviará por correo electrónico al usuario comprador l
 * Al realizar la compra el sistema no hará distinción de la ubicación de los datos
 
 ---
-# ScreenShot
-ScreenShot disponibles en : https://imgur.com/gallery/BlrksTP
+# Screenshot
+![](Index.png)
+Mas screenshots disponibles en: https://imgur.com/gallery/BlrksTP
