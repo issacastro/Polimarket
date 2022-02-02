@@ -1,15 +1,15 @@
 # PoliMarket :sunglasses:
 ---
-## Descripción del sistema
+## System description
 
-Cualquier usuario previamente registrado en el sistema podrá acceder, visualizar y comprar los artículos que se encuentren disponibles en el catálogo de ventas  o simplemente navegar y ver las características de los diferentes artículos.
-De igual manera podrá agregar sus propios artículos en venta.
+Any user previously registered in the system can access, view and purchase items that are available in the sales catalog or simply browse and view the characteristics of the different items.
+You can also add your own items for sale.
 
-## Fragmentación de datos
+## Data fragmentation
 
-La fragmentación de los datos se distribuirá a partir del criterio de la categoria seleccionada, los datos de cada categoria estarán alojadas en un servidor distinto, las compras de los productos se alojarán en base a la ubicación del producto bajo el mismo criterio, se consideraron las siguientes escuelas:
+The fragmentation of the data will be distributed based on the criteria of the selected category, the data of each category will be hosted on a different server, the purchases of the products will be hosted based on the location of the product under the same criteria, the following schools were considered:
 
-**Escuelas :**
+**Schools :**
 ---------------
 1. Centro Interdisciplinario de Ciencias de la Salud Unidad Milpa Alta (CICS UMA)
 2. Centro Interdisciplinario de Ciencias de la Salud Unidad Santo Tomás (CICS UST)
@@ -40,49 +40,49 @@ La fragmentación de los datos se distribuirá a partir del criterio de la categ
 27. Unidad Profesional Interdisciplinaria De Ingeniería, Campus Zacatecas (UPIIZ)
 28. Unidad Profesional Interdisciplinaria De Ingeniería, Campus Hidalgo (UPIIH)
 ---
-# Análisis Top-Down:
-En el sistema propuesto se utilizará un enfoque de análisis de datos Top-Down ya que partimos de un modelo relacional general para la implementación de un red de mercado de mercancías entre las 28 escuelas del Instituto Politécnico Nacional. La fragmentación se emplea dividiendo la tabla de productos por 14 categorías propuestas en éste documento, la cual nos da 14 fragmentos de la tabla mencionada que serán distribuidas en los 3 servidores de SQL Server.
+# Top-Down Analysis:
+In the proposed system a Top-Down data analysis approach will be used since we start from a general relational model for the implementation of a commodity market network among the 28 schools of the National Polytechnic Institute. The fragmentation is used by dividing the product table by 14 categories proposed in this document, which gives us 14 fragments of the mentioned table that will be distributed in the 3 SQL Server servers.
 
 ---
-## Funcionalidades del Sistema:
+## System Functionalities:
 
-### Registro de Usuarios: 
-Habrá un panel para que nuevos usuarios puedan registrarse a la plataforma.
+### User Registration: 
+There will be a panel for new users to register to the platform.
 
-### Perfil de Usuario:
-El usuario tendrá un panel para editar su perfil, así como para subir sus productos a vender y su historial de compras.
-El usuario propietario no podrá hacer compra de sus propios productos.
+### User Profile:
+The user will have a panel to edit his profile, as well as to upload his products to sell and his purchase history.
+The owner user will not be able to purchase his own products.
 
-### Inicio de Sesión:
-Para poder comprar o publicar productos será necesario que el usuario inicie  sesión con los datos siguientes: Correo Electrónico o Nombre de usuario, Contraseña.
+### Login:
+In order to purchase or post products it will be necessary for the user to log in with the following information: Email or Username, Password.
 
-### Publicación de Productos:
-Todo usuario registrado podrá publicar sus productos acompañado de máximo 5 fotografías del producto, precio, categoría y una breve descripción.
+### Publication of Products:
+All registered users will be able to publish their products accompanied by a maximum of 5 photographs of the product, price, category and a brief description.
 
-### Catálogo de Productos:
-Se tendrá una vista general de todos los productos publicados con un buscador por descripción y/o filtro de categoría y precio.
-Habrá un sección donde se tendrán los productos organizados por categoría, el cliente podrá seleccionar la categoría  
+### Product Catalog:
+There will be an overview of all products published with a search engine by description and / or category and price filter.
+There will be a section where the products will be organized by category, the client will be able to select the category.  
 
-### Carrito de Compras
-El carrito será una venta POP UP donde se mostrara las productos seleccionados por el cliente, la cantidad y precio por unidad y el total de la compra acumulado al momento.
-Tendrá la opción de concretar la compra de los producto la cual lo direccionará al apartado de simulación de compra
+### Shopping Cart
+The cart will be a POP UP sale where the products selected by the client will be shown, the quantity and price per unit and the total accumulated purchase at the moment.
+You will have the option to complete the purchase of the products which will direct you to the purchase simulation section.
 
-### Simulación de compra:
-Al realizar la compra se enviará por correo electrónico al usuario comprador los datos del vendedor y viceversa; el comprador se pondrá en contacto con el vendedor o viceversa, una vez concretada la venta, el vendedor podrá poner en el sistema que la venta se ha finalizado. En caso contrario que la venta no se concrete, podrá poner de nuevo disponible el producto.
+### Simulation of purchase:
+When making the purchase will be sent by email to the buyer user the data of the seller and vice versa; the buyer will contact the seller or vice versa, once the sale is finalized, the seller may put in the system that the sale has been completed. If the sale is not completed, the seller can make the product available again.
 
 ---
-# Consultas Distribuidas
-*Búsqueda:*
+# Distributed Queries
+*Search
 ---------------
-* El sistema tendrá una busqueda de productos en base a su Nombre, y hara la busqueda para cualquier categoria.
-* El sistema tendrá un filtro para ubicar los productos que estén en la escuela seleccionada por el usuario.
-* El sistema tendrá un filtro por categoría
+* The system will have a search of products based on their Name, and will do the search for any category.
+* The system will have a filter to locate the products that are in the school selected by the user.
+* The system will have a filter by category
 ---
-*Compra:*
+*Purchase:*
 ---------------
-* Al realizar la compra el sistema no hará distinción de la ubicación de los datos
+* When making the purchase, the system will not distinguish the location of the data.
 
 ---
 # Screenshot
 ![](Index.png)
-Mas screenshots disponibles en: https://imgur.com/gallery/BlrksTP
+More screenshots available at: https://imgur.com/gallery/BlrksTP
